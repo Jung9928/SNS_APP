@@ -1,0 +1,15 @@
+package com.jung9928.sns;
+
+import lombok.ToString;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+
+@SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
+public class SnsApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(SnsApplication.class, args);
+	}
+
+}
