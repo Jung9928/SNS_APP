@@ -1,0 +1,22 @@
+server:
+  port: 8089
+
+spring:
+  jpa:
+    database: postgresql
+    hibernate:
+      dialect: org.hibernate.dialect.PostgresSQLDialect
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: true
+
+  datasource:
+    hikari:
+      maximum-pool-size: 4
+    url: jdbc:postgresql://ec2-44-213-151-75.compute-1.amazonaws.com/dd37l748da1pb9
+    username: wivnccvebxurxb
+    password: e922cb56968d7244578c27789fc63b05c4ff6f1aa6a07967ece17fb4c847afb0
+    platform: postgres
+    driver-class-name: org.postgresql.Driver
