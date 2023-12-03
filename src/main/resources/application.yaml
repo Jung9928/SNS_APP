@@ -15,8 +15,16 @@ spring:
   datasource:
     hikari:
       maximum-pool-size: 4
-    url: jdbc:postgresql://ec2-44-213-151-75.compute-1.amazonaws.com/dd37l748da1pb9
-    username: wivnccvebxurxb
-    password: e922cb56968d7244578c27789fc63b05c4ff6f1aa6a07967ece17fb4c847afb0
+    url: jdbc:postgresql://ec2-44-215-211-215.compute-1.amazonaws.com/d3v9fre9buc2di
+    username: awdpwbdgnqhtjj
+    password: 67b461993f43be193e6025f8b6e3601cc6e089e522136c4da2a793b912149e5c
     platform: postgres
     driver-class-name: org.postgresql.Driver
+
+
+jwt:
+  secret-key:
+    jung.sns-application-2023.secret_key
+
+  # 39 days (ms단위로 계산)
+  token.expired-time-ms: 2592000000

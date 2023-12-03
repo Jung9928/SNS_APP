@@ -2,6 +2,7 @@ package com.jung9928.sns.model.entity;
 
 import com.jung9928.sns.model.UserRole;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
@@ -16,19 +17,18 @@ import java.time.Instant;
 @Table(name = "\"user\"")       // PostgreSQL의 default 제공 user 테이블이 아닌 내가 생성한 user 테이블로 접근을 위해 "\" 사용.
 @SQLDelete(sql = "UPDATE \"user\" SET deleted_at = NOW() WHERE id=?")
 @Where(clause = "deleted_at is NULL")
+@NoArgsConstructor
 public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "user_name")
+    @Column(name = "user_name", unique = true)
     private String userName;
 
-    @Column(name = "password")
     private String password;
 
-    @Column(name = "role")
     @Enumerated(EnumType.STRING)
     private UserRole role = UserRole.USER;
 
@@ -55,10 +55,10 @@ public class UserEntity {
     }
 
     public static UserEntity of(String userName, String password) {
-        UserEntity userEntity = new UserEntity();
-        userEntity.setUserName(userName);
-        userEntity.setPassword(password);
+        UserEntity entity = new UserEntity();
+        entity.setUserName(userName);
+        entity.setPassword(password);
 
-        return userEntity;
+        return entity;
     }
 }
