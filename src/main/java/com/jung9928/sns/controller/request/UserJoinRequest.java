@@ -12,6 +12,6 @@ import lombok.Setter;
 // 회원가입 시, request body로 데이터를 받는 용도의 클래스
 public class UserJoinRequest {
 
-    private String userName;
+    private String name;
     private String password;
 }
