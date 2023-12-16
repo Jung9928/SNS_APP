@@ -3,11 +3,11 @@ package com.jung9928.sns.configuration;
 import com.jung9928.sns.configuration.filter.JwtTokenFilter;
 import com.jung9928.sns.exception.CustomAuthenticationEntryPoint;
 import com.jung9928.sns.service.UserService;
-import com.sun.xml.bind.v2.TODO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -24,6 +24,12 @@ public class AuthenticationConfig extends WebSecurityConfigurerAdapter {
     private String key;
 
     @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().regexMatchers("^(?!/api/).*");
+    }
+
+    // Header 체크
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
@@ -35,7 +41,6 @@ public class AuthenticationConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .addFilterBefore(new JwtTokenFilter(key, userService), UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling()
-                .authenticationEntryPoint(new CustomAuthenticationEntryPoint())
-                ;
+                .authenticationEntryPoint(new CustomAuthenticationEntryPoint());
     }
 }

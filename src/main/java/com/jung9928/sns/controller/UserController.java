@@ -1,5 +1,6 @@
 package com.jung9928.sns.controller;
 
+import com.jung9928.sns.controller.request.UserLoginRequest;
 import com.jung9928.sns.controller.response.Response;
 import com.jung9928.sns.controller.response.UserJoinResponse;
 import com.jung9928.sns.controller.request.UserJoinRequest;
@@ -26,7 +27,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public Response<UserLoginResponse> login(@RequestBody UserJoinRequest request) {
+    public Response<UserLoginResponse> login(@RequestBody UserLoginRequest request) {
         String token = userService.login(request.getName(), request.getPassword());
         return Response.success(new UserLoginResponse(token));
     }
