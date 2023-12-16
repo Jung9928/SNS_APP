@@ -1,7 +1,9 @@
 package com.jung9928.sns.controller;
 
+import com.jung9928.sns.controller.request.PostCommentRequest;
 import com.jung9928.sns.controller.request.PostCreateRequest;
 import com.jung9928.sns.controller.request.PostModifyRequest;
+import com.jung9928.sns.controller.response.CommentResponse;
 import com.jung9928.sns.controller.response.PostResponse;
 import com.jung9928.sns.controller.response.Response;
 import com.jung9928.sns.model.Post;
@@ -58,4 +60,14 @@ public class PostController {
         return Response.success(postService.likeCount(postId));
     }
 
+    @PostMapping("/{postId}/comments")
+    public Response<Void> comment(@PathVariable Integer postId, @RequestBody PostCommentRequest request, Authentication authentication) {
+        postService.comment(postId, authentication.getName(), request.getComment());
+        return Response.success();
+    }
+
+    @GetMapping("/{postId}/comments")
+    public Response<Page<CommentResponse>> comment(@PathVariable Integer postId, Pageable pageable, Authentication authentication) {
+        return Response.success(postService.getComment(postId, pageable).map(CommentResponse::fromComment));
+    }
 }
